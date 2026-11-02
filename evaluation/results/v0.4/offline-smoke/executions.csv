@@ -1,0 +1,3 @@
+run_id,case_id,repetition,workflow,decision_controller,provider,model,success,schema_valid,source_references_valid,duplicate_question_rate,retrieval_coverage,end_to_end_latency_ms,error_category,safe_error_message,model_calls,generation_calls,retrieval_calls,agent_steps,retry_count,validation_calls,validation_failures,controller_calls,controller_latency_ms,generation_latency_ms,input_tokens,output_tokens,estimated_api_cost_usd,cost_status
+f0664fe4db0245dbb475e9e34a8701fe,recall-water-cycle,1,deterministic,none,offline,scripted-fixture,True,True,True,0.0,1.0,5.04,,,1,1,1,0,0,1,0,0,0.0,0.61,,,,unknown
+5aca74d0d0224898a1187a2eab82ff25,recall-water-cycle,1,agentic,llm,offline,scripted-fixture,True,True,True,0.0,1.0,5558.82,,,5,1,1,8,0,2,0,4,2515.8,0.47,,,,unknown

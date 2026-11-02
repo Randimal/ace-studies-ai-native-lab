@@ -1,0 +1,53 @@
+{
+  "dataset_version": "1.0",
+  "name": "synthetic-study-baseline",
+  "license": "CC0-1.0",
+  "description": "Original synthetic notes for shared fixed-workflow and future agentic comparisons. Answerability labels are review annotations, not automatically evaluated grounding scores.",
+  "cases": [
+    {
+      "id": "recall-water-cycle",
+      "category": "basic_factual_recall",
+      "count": 2,
+      "learning_objective": "Identify evaporation and its energy source.",
+      "source_answerability": "sufficient",
+      "review_notes": "Answers should distinguish evaporation from condensation without adding unprovided facts.",
+      "text": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+    },
+    {
+      "id": "concept-retrieval-practice",
+      "category": "conceptual_understanding",
+      "count": 2,
+      "learning_objective": "Explain why recalling material without notes can improve learning.",
+      "source_answerability": "sufficient",
+      "review_notes": "Check explanations connect effortful recall, identified gaps, and feedback.",
+      "text": "Retrieval practice means trying to recall studied material without looking at the notes. Attempting recall strengthens later access to that material. Feedback helps learners correct mistakes and identify gaps. Rereading can feel familiar without requiring successful recall, so familiarity alone does not demonstrate understanding."
+    },
+    {
+      "id": "reasoning-water-budget",
+      "category": "multi_step_reasoning",
+      "count": 2,
+      "learning_objective": "Combine collection and use to calculate water remaining and the next-day shortfall.",
+      "source_answerability": "sufficient",
+      "review_notes": "The tank has 18 liters after day one and is 6 liters short on day two. Structural checks do not verify these calculations.",
+      "text": "A school garden tank starts with 30 liters of water. Rain adds 12 liters before watering on the first day. Six beds each use 4 liters that day. No water is lost in any other way. No rain falls on the second day, and the same six beds each need another 4 liters."
+    },
+    {
+      "id": "insufficient-factory-output",
+      "category": "insufficient_source_information",
+      "count": 2,
+      "learning_objective": "Determine the factory daily production total.",
+      "source_answerability": "insufficient",
+      "review_notes": "Daily output cannot be determined: neither worker count nor production rate is supplied. Check for unsupported numeric claims or a supported alternate concept; successful generation alone is not a pass.",
+      "text": "The factory has a blue roof and a small garden near its entrance. Staff inspect finished items before packing them for delivery. The notes do not give the number of workers, hours worked, or number of items produced per hour. The daily production total is not recorded."
+    },
+    {
+      "id": "ambiguous-lake-temperature",
+      "category": "ambiguous_source_material",
+      "count": 2,
+      "learning_objective": "State a unique midday lake temperature.",
+      "source_answerability": "ambiguous",
+      "review_notes": "Two incompatible values refer to the same time and place. Check whether the quiz acknowledges the conflict or selects a different supported fact rather than pretending one measurement is authoritative.",
+      "text": "Two observers measured the lake at the north pier at noon on the same day. The first observer recorded 18 degrees Celsius. The second observer recorded 24 degrees Celsius. Both entries are labelled as the noon surface temperature. The notes provide no calibration information or reason to prefer either observer."
+    }
+  ]
+}

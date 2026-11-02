@@ -1,0 +1,488 @@
+{
+  "report_version": "3.0",
+  "app_version": "0.4",
+  "experiment_id": "9a7177b9d141499a8e6d1745b2115e67",
+  "configuration": {
+    "mode": "smoke",
+    "provider": "offline",
+    "model": "scripted-fixture",
+    "transport": "scripted-offline-not-a-model",
+    "workflows": [
+      "deterministic",
+      "agentic"
+    ],
+    "dataset_version": "1.0",
+    "dataset_sha256": "48a82f066e2329f2a41cb15e5a4ef948ecffd920440d097ba3b8133d9e2bfbcc",
+    "code_sha256": "bd22e44d668112a25edca440a5dbff13103349c8d8970bda816ba5905a8616dd",
+    "count": 2,
+    "repetitions": 1,
+    "generation_attempts": 3,
+    "execution_limits": {
+      "max_model_calls": 12,
+      "token_budget": 100000,
+      "timeout_seconds": 120,
+      "max_agent_steps": 24
+    },
+    "delay_seconds": 0.0,
+    "generation_settings": {
+      "max_output_tokens": 4096,
+      "provider_timeout": 30.0,
+      "sampling_requested": {},
+      "sampling_sent": {},
+      "unsupported_sampling": [],
+      "sampling_support": "Groq wire fields; model may reject. No determinism guarantee."
+    },
+    "retrieval": {
+      "implementation": "LexicalRetriever",
+      "chunk_size": 1200,
+      "overlap": 200,
+      "context_bytes": 16000,
+      "chunks": 8
+    },
+    "capabilities": {
+      "json_mode": null,
+      "json_schema": null,
+      "tool_calling": null,
+      "context_window": null,
+      "token_usage": null
+    },
+    "pricing": null,
+    "python_version": "3.11.9",
+    "langgraph_version": "1.2.14"
+  },
+  "schedule": [
+    {
+      "case_id": "recall-water-cycle",
+      "repetition": 1,
+      "workflow": "deterministic"
+    },
+    {
+      "case_id": "recall-water-cycle",
+      "repetition": 1,
+      "workflow": "agentic"
+    }
+  ],
+  "executions": [
+    {
+      "case_id": "recall-water-cycle",
+      "category": "basic_factual_recall",
+      "requested_count": 2,
+      "requested_topic": "Identify evaporation and its energy source.",
+      "learning_objective": "Identify evaporation and its energy source.",
+      "review_notes": "Answers should distinguish evaporation from condensation without adding unprovided facts.",
+      "source_answerability_annotation": "sufficient",
+      "workflow": "deterministic",
+      "decision_controller": "none",
+      "execution_trace": [],
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "groq",
+        "model": "scripted-fixture",
+        "latency_ms": 4.12,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown",
+        "total_compute_cost": "unknown",
+        "model_calls": 1,
+        "generation_calls": 1,
+        "decision_calls": 0,
+        "retrieval_calls": 1,
+        "validation_calls": 1,
+        "validation_failures": 0,
+        "decision_failures": 0,
+        "agent_steps": 0,
+        "execution_failure": null,
+        "token_budget_bound": 8048,
+        "decision_controller": "none",
+        "controller_usage": {
+          "provider": null,
+          "model": null,
+          "reported_model": null,
+          "calls": 0,
+          "latency_ms": 0.0,
+          "input_tokens": null,
+          "output_tokens": null,
+          "token_source": "unknown",
+          "usage_complete": false,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "generation_usage": {
+          "provider": "groq",
+          "model": "scripted-fixture",
+          "reported_model": null,
+          "calls": 1,
+          "latency_ms": 0.61,
+          "input_tokens": null,
+          "output_tokens": null,
+          "token_source": "unknown",
+          "usage_complete": false,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "controller_events": [],
+        "uncertainty_events": 0,
+        "fallback_events": 0
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.35,
+      "retrieval_ms": 0.13,
+      "generation_ms": 3.99,
+      "architecture": "fixed-document-workflow-v0.2",
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"In the _____ cycle, evaporation\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "water",
+            "Condensation",
+            "Precipitation",
+            "Sunlight"
+          ],
+          "answer": "water",
+          "explanation": "The passage uses \u201cwater\u201d in this phrase: \u201cIn the water cycle, evaporation\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"the water _____ evaporation changes\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Condensation",
+            "Precipitation",
+            "Sunlight",
+            "cycle"
+          ],
+          "answer": "cycle",
+          "explanation": "The passage uses \u201ccycle\u201d in this phrase: \u201cthe water cycle, evaporation changes\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-bb685b67db5a3c52",
+          "page": null,
+          "relevance_score": 0.683245,
+          "reason": "lexical_topic"
+        }
+      ],
+      "model_calls": 1,
+      "generation_calls": 1,
+      "decision_calls": 0,
+      "retrieval_calls": 1,
+      "validation_calls": 1,
+      "validation_failures": 0,
+      "decision_failures": 0,
+      "retry_count": 0,
+      "agent_steps": 0,
+      "uncertainty_events": 0,
+      "fallback_events": 0,
+      "controller_usage": {
+        "provider": null,
+        "model": null,
+        "reported_model": null,
+        "calls": 0,
+        "latency_ms": 0.0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "generation_usage": {
+        "provider": "groq",
+        "model": "scripted-fixture",
+        "reported_model": null,
+        "calls": 1,
+        "latency_ms": 0.61,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "end_to_end_latency_ms": 5.04,
+      "repetition": 1,
+      "job_id": "3b7925ea520caffa12c32190f46b06155569d532772fc1706c51804708e0245f",
+      "run_id": "f0664fe4db0245dbb475e9e34a8701fe",
+      "blind_run_id": "f8144111953d496499cd6d36049b3db6",
+      "provider": "offline",
+      "model": "scripted-fixture",
+      "error_category": null,
+      "safe_error_message": null
+    },
+    {
+      "case_id": "recall-water-cycle",
+      "category": "basic_factual_recall",
+      "requested_count": 2,
+      "requested_topic": "Identify evaporation and its energy source.",
+      "learning_objective": "Identify evaporation and its energy source.",
+      "review_notes": "Answers should distinguish evaporation from condensation without adding unprovided facts.",
+      "source_answerability_annotation": "sufficient",
+      "workflow": "agentic",
+      "decision_controller": "llm",
+      "execution_trace": [
+        {
+          "step": 1,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 580.21,
+          "code": null
+        },
+        {
+          "step": 2,
+          "action": "retrieve",
+          "outcome": "ok",
+          "duration_ms": 0.12,
+          "code": null
+        },
+        {
+          "step": 3,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 640.56,
+          "code": null
+        },
+        {
+          "step": 4,
+          "action": "generate",
+          "outcome": "ok",
+          "duration_ms": 0.73,
+          "code": null
+        },
+        {
+          "step": 5,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 680.37,
+          "code": null
+        },
+        {
+          "step": 6,
+          "action": "validate",
+          "outcome": "ok",
+          "duration_ms": 0.62,
+          "code": null
+        },
+        {
+          "step": 7,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 615.88,
+          "code": null
+        },
+        {
+          "step": 8,
+          "action": "finish",
+          "outcome": "ok",
+          "duration_ms": 0.4,
+          "code": null
+        }
+      ],
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "groq",
+        "model": "scripted-fixture",
+        "latency_ms": 2535.73,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown",
+        "total_compute_cost": "unknown",
+        "model_calls": 5,
+        "generation_calls": 1,
+        "decision_calls": 4,
+        "retrieval_calls": 1,
+        "validation_calls": 2,
+        "validation_failures": 0,
+        "decision_failures": 0,
+        "agent_steps": 8,
+        "execution_failure": null,
+        "token_budget_bound": 21741,
+        "decision_controller": "llm",
+        "controller_usage": {
+          "provider": "groq",
+          "model": "scripted-fixture",
+          "reported_model": null,
+          "calls": 4,
+          "latency_ms": 2515.8,
+          "input_tokens": null,
+          "output_tokens": null,
+          "token_source": "unknown",
+          "usage_complete": false,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "generation_usage": {
+          "provider": "groq",
+          "model": "scripted-fixture",
+          "reported_model": null,
+          "calls": 1,
+          "latency_ms": 0.47,
+          "input_tokens": null,
+          "output_tokens": null,
+          "token_source": "unknown",
+          "usage_complete": false,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "controller_events": [],
+        "uncertainty_events": 0,
+        "fallback_events": 0
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.14,
+      "retrieval_ms": 0.03,
+      "generation_ms": 2535.7,
+      "architecture": "langgraph-agent-v0.3",
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"In the _____ cycle, evaporation\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "water",
+            "Condensation",
+            "Precipitation",
+            "Sunlight"
+          ],
+          "answer": "water",
+          "explanation": "The passage uses \u201cwater\u201d in this phrase: \u201cIn the water cycle, evaporation\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"the water _____ evaporation changes\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Condensation",
+            "Precipitation",
+            "Sunlight",
+            "cycle"
+          ],
+          "answer": "cycle",
+          "explanation": "The passage uses \u201ccycle\u201d in this phrase: \u201cthe water cycle, evaporation changes\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-bb685b67db5a3c52",
+          "page": null,
+          "relevance_score": null,
+          "reason": "document_coverage"
+        }
+      ],
+      "model_calls": 5,
+      "generation_calls": 1,
+      "decision_calls": 4,
+      "retrieval_calls": 1,
+      "validation_calls": 2,
+      "validation_failures": 0,
+      "decision_failures": 0,
+      "retry_count": 0,
+      "agent_steps": 8,
+      "uncertainty_events": 0,
+      "fallback_events": 0,
+      "controller_usage": {
+        "provider": "groq",
+        "model": "scripted-fixture",
+        "reported_model": null,
+        "calls": 4,
+        "latency_ms": 2515.8,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "generation_usage": {
+        "provider": "groq",
+        "model": "scripted-fixture",
+        "reported_model": null,
+        "calls": 1,
+        "latency_ms": 0.47,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "end_to_end_latency_ms": 5558.82,
+      "repetition": 1,
+      "job_id": "d1b7340311af968716384fbe5d9e269b9f4f0b90395513563b97fe51b274a8af",
+      "run_id": "5aca74d0d0224898a1187a2eab82ff25",
+      "blind_run_id": "710f11100caf4723866f6f090809f59b",
+      "provider": "offline",
+      "model": "scripted-fixture",
+      "error_category": null,
+      "safe_error_message": null
+    }
+  ]
+}

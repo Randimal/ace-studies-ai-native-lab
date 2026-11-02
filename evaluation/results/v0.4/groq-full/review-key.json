@@ -1,0 +1,182 @@
+[
+  {
+    "blind_run_id": "048532c846414aa08cb4a06f97510908",
+    "run_id": "24f41b069d504b7991f6a627fa20107b",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "b12794edcbbe42dfad5842c42b450703",
+    "run_id": "8e82192dac0544c7acc73773fd9bb745",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "ca2a25151bfc4c13b74d00d4ae655520",
+    "run_id": "fb520b2e8f314fa5887a6fedc7171e81",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "e6ed5448adff418d808a32ba41b7fde0",
+    "run_id": "de5e1bd52f4c4b0385e6dba13eededba",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "09eca5c84c92490e918b0cb84103166c",
+    "run_id": "277a2c5b2e1d40408c48b048b3d98738",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "e841f9fdb9bc49e887ff30abf72ce81f",
+    "run_id": "9aadedb51d654c30919828bf131f567b",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "c10ece1dd2d547b19ec5faa0df0b8e1a",
+    "run_id": "9885ad7706524eee9a616981b7cd4466",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "40b18c56ce9f48439a4ca054fc19ceb0",
+    "run_id": "8bbe9d5b49b94370bf56611aa88a3ba4",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "793eeff64b6f41f2b669c452fb508d0a",
+    "run_id": "9e4961c35f2b4b7c82d3a98859441e81",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "3b318696e0564e5caf81943b8769aa7e",
+    "run_id": "2f423f421e994c33bfbef71fdeb70b6d",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "a48f789d950e46bda5453dfb0f8fed12",
+    "run_id": "6544fd87851b4024bfb8e7e95a6ab612",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "efdbe5de231b4c48878945b7f32785d1",
+    "run_id": "038cd906f7c44794b7ad98ea95048808",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "620aa42b4a8f4c2fa560e18cb03c4a21",
+    "run_id": "705531c9da6143c7b0fb5c668f765f81",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "b030b1a626864aa1b42b4fed2b0ed39e",
+    "run_id": "99fc188d4da64a289ab52a2897c1a0db",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "0d4e989265f240e39bee79ef7d158c6a",
+    "run_id": "dc6ef5b83d364ceb948841e4e8c21977",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "2dc1fc816452406080c34706f99d329b",
+    "run_id": "313bef1ec13547389d5ab7b207ff6e08",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "73c1c6b2d6ab481e91035b5a09871323",
+    "run_id": "7464f16df8e649ed8af8a5fc8e7990e4",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "fa7c36b5a9a84947a0daac13654a70ba",
+    "run_id": "0548d1afed4b4eeeaabe582a337b478a",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "3b0dc4856a824f72b71e08c947747737",
+    "run_id": "e27cf196e43340b49242e3e91074ff58",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "cf12dc5092ed48d0a2997b764155a220",
+    "run_id": "965fb11e2737447bba491dd7fe708dd6",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "bd48a63f8c3f4b6fb63952c023013d24",
+    "run_id": "ebbfe9b16b1f419bb039ec810d102004",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "e2dea35271a7448daaa881e9b8b8438c",
+    "run_id": "ed836dc2a07045a5b56eaf7642fb5857",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "58f37f87185b49009cce2536c4e6239e",
+    "run_id": "d4d482eddbef44de8c5c0206e3690baf",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "d9529f8316ee4b6fac06c27aa38dcd68",
+    "run_id": "e39e34e5af6f4e739811b9d10287807b",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "6d291a2e565546f6ad7008799c5fa1e2",
+    "run_id": "cda6c0ce8b624a7592579a1e7d6ffa29",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "38c66b914da5459f90d73a553aec090e",
+    "run_id": "f37b8222c77b44dcbb161db7c1006597",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "2a02eeeef70447e985b8493478ce9bff",
+    "run_id": "92424698cb6a479cb517949dc5509a49",
+    "workflow": "agentic",
+    "controller": "llm"
+  },
+  {
+    "blind_run_id": "160e9b25835b43968f95f0d58bc2dadb",
+    "run_id": "e9f6c94abdbd4becb8a7ff7b3ff48b3a",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "cabe92f16a7c45e38e3dea79d3412b6d",
+    "run_id": "1b11b9de3ed54ad5a6449db1743160b4",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "9a77fe9fde474aa7aadd6818704638d9",
+    "run_id": "48cf47ebd2dc48debc06ea0d028d0028",
+    "workflow": "agentic",
+    "controller": "llm"
+  }
+]

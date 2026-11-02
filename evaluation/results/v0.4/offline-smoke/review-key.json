@@ -1,0 +1,14 @@
+[
+  {
+    "blind_run_id": "f8144111953d496499cd6d36049b3db6",
+    "run_id": "f0664fe4db0245dbb475e9e34a8701fe",
+    "workflow": "deterministic",
+    "controller": "none"
+  },
+  {
+    "blind_run_id": "710f11100caf4723866f6f090809f59b",
+    "run_id": "5aca74d0d0224898a1187a2eab82ff25",
+    "workflow": "agentic",
+    "controller": "llm"
+  }
+]

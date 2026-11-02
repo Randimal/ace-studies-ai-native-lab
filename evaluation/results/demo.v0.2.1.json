@@ -1,0 +1,507 @@
+{
+  "report_version": "1.0",
+  "app_version": "0.2.1",
+  "workflow": "fixed-document-workflow",
+  "created_at": "2026-10-11T14:21:31.453757+00:00",
+  "dataset_version": "1.0",
+  "dataset_sha256": "48a82f066e2329f2a41cb15e5a4ef948ecffd920440d097ba3b8133d9e2bfbcc",
+  "code_sha256": "467200ebe84d96b9712e1248ab2d8b646e4bfcc29dbc1c59f9507cc1cfeb9463",
+  "python_version": "3.11.9",
+  "document_configuration": {
+    "chunk_size": 1200,
+    "overlap": 200,
+    "context_bytes": 16000,
+    "retrieval_chunks": 8
+  },
+  "provider": "offline",
+  "model": "deterministic",
+  "provider_configuration": {
+    "capabilities": {
+      "json_mode": null,
+      "json_schema": null,
+      "tool_calling": null,
+      "context_window": null,
+      "token_usage": null
+    },
+    "pricing": null,
+    "max_output_tokens": 4096,
+    "max_retries": 2,
+    "timeout_seconds": 30.0
+  },
+  "limitations": "Structural checks and citations do not verify facts, reasoning, distractor plausibility, or handling of ambiguity. Failed outputs are not retained; quality rates describe accepted final quizzes only. Demo is literal word completion. Human review is required.",
+  "cases": [
+    {
+      "case_id": "recall-water-cycle",
+      "category": "basic_factual_recall",
+      "requested_count": 2,
+      "requested_topic": "Identify evaporation and its energy source.",
+      "learning_objective": "Identify evaporation and its energy source.",
+      "review_notes": "Answers should distinguish evaporation from condensation without adding unprovided facts.",
+      "source_answerability_annotation": "sufficient",
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "offline",
+        "model": "deterministic",
+        "latency_ms": 7.03,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "not_applicable",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "not_applicable",
+        "total_compute_cost": "unknown"
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.7,
+      "retrieval_ms": 0.28,
+      "generation_ms": 6.75,
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"In the _____ cycle, evaporation\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "water",
+            "Condensation",
+            "Precipitation",
+            "Sunlight"
+          ],
+          "answer": "water",
+          "explanation": "The passage uses \u201cwater\u201d in this phrase: \u201cIn the water cycle, evaporation\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"the water _____ evaporation changes\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Condensation",
+            "Precipitation",
+            "Sunlight",
+            "cycle"
+          ],
+          "answer": "cycle",
+          "explanation": "The passage uses \u201ccycle\u201d in this phrase: \u201cthe water cycle, evaporation changes\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-bb685b67db5a3c52",
+          "page": null,
+          "relevance_score": 0.683245,
+          "reason": "lexical_topic"
+        }
+      ],
+      "end_to_end_latency_ms": 8.44
+    },
+    {
+      "case_id": "concept-retrieval-practice",
+      "category": "conceptual_understanding",
+      "requested_count": 2,
+      "requested_topic": "Explain why recalling material without notes can improve learning.",
+      "learning_objective": "Explain why recalling material without notes can improve learning.",
+      "review_notes": "Check explanations connect effortful recall, identified gaps, and feedback.",
+      "source_answerability_annotation": "sufficient",
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "offline",
+        "model": "deterministic",
+        "latency_ms": 6.39,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "not_applicable",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "not_applicable",
+        "total_compute_cost": "unknown"
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.17,
+      "retrieval_ms": 0.12,
+      "generation_ms": 6.27,
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"_____ practice means\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Retrieval",
+            "Attempting",
+            "Feedback",
+            "Rereading"
+          ],
+          "answer": "Retrieval",
+          "explanation": "The passage uses \u201cRetrieval\u201d in this phrase: \u201cRetrieval practice means\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-b032013ae48816fd"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-b032013ae48816fd",
+              "page": null,
+              "excerpt": "Retrieval practice means trying to recall studied material without looking at the notes. Attempting recall strengthens later access to that material. Feedback helps learners correct mistakes and identify gaps. Rereading can feel familiar without requiring successful recall, so familiarity alone does not demonstrate understanding."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"Retrieval _____ means trying\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Attempting",
+            "Feedback",
+            "Rereading",
+            "practice"
+          ],
+          "answer": "practice",
+          "explanation": "The passage uses \u201cpractice\u201d in this phrase: \u201cRetrieval practice means trying\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-b032013ae48816fd"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-b032013ae48816fd",
+              "page": null,
+              "excerpt": "Retrieval practice means trying to recall studied material without looking at the notes. Attempting recall strengthens later access to that material. Feedback helps learners correct mistakes and identify gaps. Rereading can feel familiar without requiring successful recall, so familiarity alone does not demonstrate understanding."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-b032013ae48816fd",
+          "page": null,
+          "relevance_score": 1.36649,
+          "reason": "lexical_topic"
+        }
+      ],
+      "end_to_end_latency_ms": 7.43
+    },
+    {
+      "case_id": "reasoning-water-budget",
+      "category": "multi_step_reasoning",
+      "requested_count": 2,
+      "requested_topic": "Combine collection and use to calculate water remaining and the next-day shortfall.",
+      "learning_objective": "Combine collection and use to calculate water remaining and the next-day shortfall.",
+      "review_notes": "The tank has 18 liters after day one and is 6 liters short on day two. Structural checks do not verify these calculations.",
+      "source_answerability_annotation": "sufficient",
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "offline",
+        "model": "deterministic",
+        "latency_ms": 4.18,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "not_applicable",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "not_applicable",
+        "total_compute_cost": "unknown"
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.31,
+      "retrieval_ms": 0.11,
+      "generation_ms": 4.069999999999999,
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"A _____ garden tank\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "school",
+            "adds",
+            "another",
+            "beds"
+          ],
+          "answer": "school",
+          "explanation": "The passage uses \u201cschool\u201d in this phrase: \u201cA school garden tank\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-0555f3c112e84f4c"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-0555f3c112e84f4c",
+              "page": null,
+              "excerpt": "A school garden tank starts with 30 liters of water. Rain adds 12 liters before watering on the first day. Six beds each use 4 liters that day. No water is lost in any other way. No rain falls on the second day, and the same six beds each need another 4 liters."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"A school _____ tank starts\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "adds",
+            "another",
+            "beds",
+            "garden"
+          ],
+          "answer": "garden",
+          "explanation": "The passage uses \u201cgarden\u201d in this phrase: \u201cA school garden tank starts\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-0555f3c112e84f4c"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-0555f3c112e84f4c",
+              "page": null,
+              "excerpt": "A school garden tank starts with 30 liters of water. Rain adds 12 liters before watering on the first day. Six beds each use 4 liters that day. No water is lost in any other way. No rain falls on the second day, and the same six beds each need another 4 liters."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-0555f3c112e84f4c",
+          "page": null,
+          "relevance_score": 1.135317,
+          "reason": "lexical_topic"
+        }
+      ],
+      "end_to_end_latency_ms": 5.24
+    },
+    {
+      "case_id": "insufficient-factory-output",
+      "category": "insufficient_source_information",
+      "requested_count": 2,
+      "requested_topic": "Determine the factory daily production total.",
+      "learning_objective": "Determine the factory daily production total.",
+      "review_notes": "Daily output cannot be determined: neither worker count nor production rate is supplied. Check for unsupported numeric claims or a supported alternate concept; successful generation alone is not a pass.",
+      "source_answerability_annotation": "insufficient",
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "offline",
+        "model": "deterministic",
+        "latency_ms": 2.73,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "not_applicable",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "not_applicable",
+        "total_compute_cost": "unknown"
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.29,
+      "retrieval_ms": 0.09,
+      "generation_ms": 2.64,
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"The _____ has a\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "factory",
+            "Staff",
+            "before",
+            "blue"
+          ],
+          "answer": "factory",
+          "explanation": "The passage uses \u201cfactory\u201d in this phrase: \u201cThe factory has a\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-73b3fc26cb364d86"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-73b3fc26cb364d86",
+              "page": null,
+              "excerpt": "The factory has a blue roof and a small garden near its entrance. Staff inspect finished items before packing them for delivery. The notes do not give the number of workers, hours worked, or number of items produced per hour. The daily production total is not recorded."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"has a _____ roof and\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Staff",
+            "before",
+            "daily",
+            "blue"
+          ],
+          "answer": "blue",
+          "explanation": "The passage uses \u201cblue\u201d in this phrase: \u201chas a blue roof and\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-73b3fc26cb364d86"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-73b3fc26cb364d86",
+              "page": null,
+              "excerpt": "The factory has a blue roof and a small garden near its entrance. Staff inspect finished items before packing them for delivery. The notes do not give the number of workers, hours worked, or number of items produced per hour. The daily production total is not recorded."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-73b3fc26cb364d86",
+          "page": null,
+          "relevance_score": 1.150728,
+          "reason": "lexical_topic"
+        }
+      ],
+      "end_to_end_latency_ms": 3.53
+    },
+    {
+      "case_id": "ambiguous-lake-temperature",
+      "category": "ambiguous_source_material",
+      "requested_count": 2,
+      "requested_topic": "State a unique midday lake temperature.",
+      "learning_objective": "State a unique midday lake temperature.",
+      "review_notes": "Two incompatible values refer to the same time and place. Check whether the quiz acknowledges the conflict or selects a different supported fact rather than pretending one measurement is authoritative.",
+      "source_answerability_annotation": "ambiguous",
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "offline",
+        "model": "deterministic",
+        "latency_ms": 3.24,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "not_applicable",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "not_applicable",
+        "total_compute_cost": "unknown"
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.2,
+      "retrieval_ms": 0.08,
+      "generation_ms": 3.16,
+      "questions": [
+        {
+          "question": "Which word completes this quoted passage? \"Two _____ measured the\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "observers",
+            "Both",
+            "Celsius",
+            "calibration"
+          ],
+          "answer": "observers",
+          "explanation": "The passage uses \u201cobservers\u201d in this phrase: \u201cTwo observers measured the\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-d95e472f486eb202"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-d95e472f486eb202",
+              "page": null,
+              "excerpt": "Two observers measured the lake at the north pier at noon on the same day. The first observer recorded 18 degrees Celsius. The second observer recorded 24 degrees Celsius. Both entries are labelled as the noon surface temperature. The notes provide no calibration information or reason to prefer either observer."
+            }
+          ]
+        },
+        {
+          "question": "Which word completes this quoted passage? \"Two observers _____ the lake\"",
+          "question_type": "multiple_choice",
+          "options": [
+            "Both",
+            "Celsius",
+            "calibration",
+            "measured"
+          ],
+          "answer": "measured",
+          "explanation": "The passage uses \u201cmeasured\u201d in this phrase: \u201cTwo observers measured the lake\u201d. It restores the quoted wording. This demo tests literal word completion.",
+          "source_chunk_ids": [
+            "chunk-d95e472f486eb202"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-d95e472f486eb202",
+              "page": null,
+              "excerpt": "Two observers measured the lake at the north pier at noon on the same day. The first observer recorded 18 degrees Celsius. The second observer recorded 24 degrees Celsius. Both entries are labelled as the noon surface temperature. The notes provide no calibration information or reason to prefer either observer."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-d95e472f486eb202",
+          "page": null,
+          "relevance_score": 0.575364,
+          "reason": "lexical_topic"
+        }
+      ],
+      "end_to_end_latency_ms": 4.95
+    }
+  ],
+  "summary": {
+    "cases": 5,
+    "generation_failure_rate": 0.0,
+    "exact_question_count_success_rate": 1.0,
+    "mean_end_to_end_latency_ms": 5.92,
+    "estimated_api_cost_usd": null,
+    "factual_grounding": "not_evaluated"
+  }
+}

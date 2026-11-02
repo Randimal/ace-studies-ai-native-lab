@@ -1,0 +1,662 @@
+{
+  "report_version": "3.1",
+  "app_version": "0.4.1",
+  "experiment_id": "e5de8522ab864a5ca7c16093d3e2b627",
+  "configuration": {
+    "mode": "smoke",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "transport": "live",
+    "workflows": [
+      "deterministic",
+      "agentic"
+    ],
+    "dataset_version": "1.0",
+    "dataset_sha256": "48a82f066e2329f2a41cb15e5a4ef948ecffd920440d097ba3b8133d9e2bfbcc",
+    "code_sha256": "5af6a7d30b65e9dc4df7b63b41c968cb790a3ca0a77f63be91475868055cee72",
+    "count": 2,
+    "repetitions": 1,
+    "generation_attempts": 3,
+    "execution_limits": {
+      "max_model_calls": 12,
+      "token_budget": 100000,
+      "timeout_seconds": 120,
+      "max_agent_steps": 24
+    },
+    "delay_seconds": 2.0,
+    "request_pacing": {
+      "enabled": true,
+      "rpm": null,
+      "tpm": null,
+      "max_wait_seconds": 30.0,
+      "token_reservation": "prompt/schema UTF-8 bytes plus output ceiling"
+    },
+    "generation_settings": {
+      "max_output_tokens": 4096,
+      "provider_timeout": 30.0,
+      "sampling_requested": {},
+      "sampling_sent": {},
+      "unsupported_sampling": [],
+      "sampling_support": "Groq wire fields; model may reject. No determinism guarantee."
+    },
+    "retrieval": {
+      "implementation": "LexicalRetriever",
+      "chunk_size": 1200,
+      "overlap": 200,
+      "context_bytes": 16000,
+      "chunks": 8
+    },
+    "capabilities": {
+      "json_mode": null,
+      "json_schema": null,
+      "tool_calling": null,
+      "context_window": null,
+      "token_usage": null
+    },
+    "pricing": null,
+    "python_version": "3.11.9",
+    "langgraph_version": "1.2.14"
+  },
+  "schedule": [
+    {
+      "case_id": "recall-water-cycle",
+      "repetition": 1,
+      "workflow": "deterministic"
+    },
+    {
+      "case_id": "recall-water-cycle",
+      "repetition": 1,
+      "workflow": "agentic"
+    }
+  ],
+  "executions": [
+    {
+      "case_id": "recall-water-cycle",
+      "category": "basic_factual_recall",
+      "requested_count": 2,
+      "requested_topic": "Identify evaporation and its energy source.",
+      "learning_objective": "Identify evaporation and its energy source.",
+      "review_notes": "Answers should distinguish evaporation from condensation without adding unprovided facts.",
+      "source_answerability_annotation": "sufficient",
+      "workflow": "deterministic",
+      "decision_controller": "none",
+      "execution_trace": [],
+      "success": true,
+      "checks_available": true,
+      "failure_code": null,
+      "generated_count": 2,
+      "count_matches": true,
+      "schema_valid": true,
+      "answer_option_consistency": true,
+      "source_references_valid": true,
+      "duplicate_question_rate": 0.0,
+      "metrics": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "latency_ms": 1933.68,
+        "input_tokens": 748,
+        "output_tokens": 541,
+        "token_source": "reported",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown",
+        "total_compute_cost": "unknown",
+        "model_calls": 1,
+        "generation_calls": 1,
+        "decision_calls": 0,
+        "retrieval_calls": 1,
+        "validation_calls": 1,
+        "validation_failures": 0,
+        "decision_failures": 0,
+        "agent_steps": 0,
+        "execution_failure": null,
+        "token_budget_bound": 8048,
+        "decision_controller": "none",
+        "controller_usage": {
+          "provider": null,
+          "model": null,
+          "reported_model": null,
+          "calls": 0,
+          "latency_ms": 0.0,
+          "input_tokens": null,
+          "output_tokens": null,
+          "token_source": "unknown",
+          "usage_complete": false,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "generation_usage": {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "reported_model": null,
+          "calls": 1,
+          "latency_ms": 1925.52,
+          "input_tokens": 748,
+          "output_tokens": 541,
+          "token_source": "reported",
+          "usage_complete": true,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "controller_events": [],
+        "uncertainty_events": 0,
+        "fallback_events": 0,
+        "diagnostics_version": "1",
+        "provider_attempts": [
+          {
+            "sequence": 1,
+            "benchmark_sequence": 1,
+            "reserved_units": 8048,
+            "component": "generation",
+            "started_at": "2026-10-12T21:41:51.842833+00:00",
+            "duration_ms": 1925.45,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 999.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 86.4,
+              "remaining_tokens": 6724.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 9.57
+            },
+            "finish_reason": "stop",
+            "complete": true,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "accepted",
+            "input_tokens": 748,
+            "output_tokens": 541
+          }
+        ],
+        "pacing_wait_ms": 0.0,
+        "provider_execution_ms": 1925.45,
+        "controller_output_failures": 0,
+        "underlying_terminal_error": null,
+        "termination_reason": null
+      },
+      "factual_grounding": "not_evaluated",
+      "retrieval_coverage": 1.0,
+      "cited_retrieval_coverage": 1.0,
+      "processing_ms": 0.52,
+      "retrieval_ms": 0.19,
+      "generation_ms": 1933.49,
+      "architecture": "fixed-document-workflow-v0.2",
+      "questions": [
+        {
+          "question": "Which process in the water cycle changes liquid water into water vapor?",
+          "question_type": "multiple_choice",
+          "options": [
+            "Evaporation",
+            "Condensation",
+            "Precipitation",
+            "Sublimation",
+            "Transpiration"
+          ],
+          "answer": "Evaporation",
+          "explanation": "Evaporation is the part of the water cycle where liquid water turns into water vapor, as described in the passage.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        },
+        {
+          "question": "What supplies the energy necessary for evaporation?",
+          "question_type": "multiple_choice",
+          "options": [
+            "Sunlight",
+            "Groundwater",
+            "Atmospheric pressure",
+            "Temperature of ice",
+            "Wind"
+          ],
+          "answer": "Sunlight",
+          "explanation": "The passage states that sunlight supplies the energy required for evaporation, making it the correct answer.",
+          "source_chunk_ids": [
+            "chunk-bb685b67db5a3c52"
+          ],
+          "sources": [
+            {
+              "chunk_id": "chunk-bb685b67db5a3c52",
+              "page": null,
+              "excerpt": "In the water cycle, evaporation changes liquid water into water vapor. Sunlight supplies energy for evaporation. Condensation changes water vapor into liquid droplets. Precipitation returns water from clouds to the ground."
+            }
+          ]
+        }
+      ],
+      "retrieval": [
+        {
+          "chunk_id": "chunk-bb685b67db5a3c52",
+          "page": null,
+          "relevance_score": 0.683245,
+          "reason": "lexical_topic"
+        }
+      ],
+      "model_calls": 1,
+      "generation_calls": 1,
+      "decision_calls": 0,
+      "retrieval_calls": 1,
+      "validation_calls": 1,
+      "validation_failures": 0,
+      "decision_failures": 0,
+      "retry_count": 0,
+      "agent_steps": 0,
+      "uncertainty_events": 0,
+      "fallback_events": 0,
+      "controller_usage": {
+        "provider": null,
+        "model": null,
+        "reported_model": null,
+        "calls": 0,
+        "latency_ms": 0.0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "token_source": "unknown",
+        "usage_complete": false,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "generation_usage": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "reported_model": null,
+        "calls": 1,
+        "latency_ms": 1925.52,
+        "input_tokens": 748,
+        "output_tokens": 541,
+        "token_source": "reported",
+        "usage_complete": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "end_to_end_latency_ms": 1935.03,
+      "repetition": 1,
+      "job_id": "3b7925ea520caffa12c32190f46b06155569d532772fc1706c51804708e0245f",
+      "run_id": "e5601381d6394a36a851819669519275",
+      "blind_run_id": "fc17803a4ba44c8a9906a8004fcf67e6",
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "inter_execution_wait_ms": 0.0,
+      "error_category": null,
+      "safe_error_message": null
+    },
+    {
+      "case_id": "recall-water-cycle",
+      "category": "basic_factual_recall",
+      "requested_count": 2,
+      "requested_topic": "Identify evaporation and its energy source.",
+      "learning_objective": "Identify evaporation and its energy source.",
+      "review_notes": "Answers should distinguish evaporation from condensation without adding unprovided facts.",
+      "source_answerability_annotation": "sufficient",
+      "workflow": "agentic",
+      "decision_controller": "llm",
+      "execution_trace": [
+        {
+          "step": 1,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 1484.14,
+          "code": null
+        },
+        {
+          "step": 2,
+          "action": "retrieve",
+          "outcome": "ok",
+          "duration_ms": 0.39,
+          "code": null
+        },
+        {
+          "step": 3,
+          "action": "decide",
+          "outcome": "rejected",
+          "duration_ms": 1569.28,
+          "code": "invalid_action_or_arguments"
+        },
+        {
+          "step": 4,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 1504.14,
+          "code": null
+        },
+        {
+          "step": 5,
+          "action": "generate",
+          "outcome": "ok",
+          "duration_ms": 1646.1,
+          "code": null
+        },
+        {
+          "step": 6,
+          "action": "decide",
+          "outcome": "ok",
+          "duration_ms": 1480.88,
+          "code": null
+        },
+        {
+          "step": 7,
+          "action": "validate",
+          "outcome": "ok",
+          "duration_ms": 0.47,
+          "code": null
+        },
+        {
+          "step": 8,
+          "action": "decide",
+          "outcome": "rejected",
+          "duration_ms": 1290.95,
+          "code": "invalid_action_or_arguments"
+        },
+        {
+          "step": 9,
+          "action": "decide",
+          "outcome": "failed",
+          "duration_ms": 1734.25,
+          "code": "invalid_decision"
+        }
+      ],
+      "success": false,
+      "checks_available": false,
+      "failure_code": "invalid_decision",
+      "generated_count": null,
+      "count_matches": null,
+      "schema_valid": null,
+      "answer_option_consistency": null,
+      "source_references_valid": null,
+      "duplicate_question_rate": null,
+      "metrics": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "latency_ms": 10749.26,
+        "input_tokens": 4355,
+        "output_tokens": 2787,
+        "token_source": "reported",
+        "usage_complete": true,
+        "retry_count": 0,
+        "success": false,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown",
+        "total_compute_cost": "unknown",
+        "model_calls": 7,
+        "generation_calls": 1,
+        "decision_calls": 6,
+        "retrieval_calls": 1,
+        "validation_calls": 1,
+        "validation_failures": 0,
+        "decision_failures": 3,
+        "agent_steps": 9,
+        "execution_failure": "invalid_decision",
+        "token_budget_bound": 28879,
+        "decision_controller": "llm",
+        "controller_usage": {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "reported_model": null,
+          "calls": 6,
+          "latency_ms": 9060.23,
+          "input_tokens": 3585,
+          "output_tokens": 2248,
+          "token_source": "reported",
+          "usage_complete": true,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "generation_usage": {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "reported_model": null,
+          "calls": 1,
+          "latency_ms": 1645.65,
+          "input_tokens": 770,
+          "output_tokens": 539,
+          "token_source": "reported",
+          "usage_complete": true,
+          "estimated_api_cost_usd": null,
+          "cost_status": "unknown"
+        },
+        "controller_events": [],
+        "uncertainty_events": 0,
+        "fallback_events": 0,
+        "diagnostics_version": "1",
+        "provider_attempts": [
+          {
+            "sequence": 1,
+            "benchmark_sequence": 2,
+            "reserved_units": 3205,
+            "component": "controller",
+            "started_at": "2026-10-12T21:41:59.825885+00:00",
+            "duration_ms": 1483.17,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 998.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 172.8,
+              "remaining_tokens": 6686.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 9.855
+            },
+            "finish_reason": "stop",
+            "complete": true,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "accepted",
+            "input_tokens": 541,
+            "output_tokens": 266
+          },
+          {
+            "sequence": 2,
+            "benchmark_sequence": 3,
+            "reserved_units": 3490,
+            "component": "controller",
+            "started_at": "2026-10-12T21:42:01.313206+00:00",
+            "duration_ms": 1568.48,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 997.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 259.2,
+              "remaining_tokens": 6003.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 14.977
+            },
+            "finish_reason": "length",
+            "complete": false,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "controller_incomplete_output",
+            "input_tokens": 607,
+            "output_tokens": 512
+          },
+          {
+            "sequence": 3,
+            "benchmark_sequence": 4,
+            "reserved_units": 3503,
+            "component": "controller",
+            "started_at": "2026-10-12T21:42:02.884365+00:00",
+            "duration_ms": 1503.37,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 996.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 345.6,
+              "remaining_tokens": 5079.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 21.907
+            },
+            "finish_reason": "stop",
+            "complete": true,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "accepted",
+            "input_tokens": 608,
+            "output_tokens": 430
+          },
+          {
+            "sequence": 4,
+            "benchmark_sequence": 5,
+            "reserved_units": 8170,
+            "component": "generation",
+            "started_at": "2026-10-12T21:42:04.390127+00:00",
+            "duration_ms": 1645.59,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 995.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 432.0,
+              "remaining_tokens": 4066.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 29.505
+            },
+            "finish_reason": "stop",
+            "complete": true,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "accepted",
+            "input_tokens": 770,
+            "output_tokens": 539
+          },
+          {
+            "sequence": 5,
+            "benchmark_sequence": 6,
+            "reserved_units": 3502,
+            "component": "controller",
+            "started_at": "2026-10-12T21:42:06.036434+00:00",
+            "duration_ms": 1480.49,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 994.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 518.4,
+              "remaining_tokens": 3176.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 36.18
+            },
+            "finish_reason": "stop",
+            "complete": true,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "accepted",
+            "input_tokens": 609,
+            "output_tokens": 256
+          },
+          {
+            "sequence": 6,
+            "benchmark_sequence": 7,
+            "reserved_units": 3496,
+            "component": "controller",
+            "started_at": "2026-10-12T21:42:07.519602+00:00",
+            "duration_ms": 1290.5,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 993.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 604.8,
+              "remaining_tokens": 2496.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 41.279
+            },
+            "finish_reason": "stop",
+            "complete": true,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "controller_invalid_structure",
+            "input_tokens": 609,
+            "output_tokens": 272
+          },
+          {
+            "sequence": 7,
+            "benchmark_sequence": 8,
+            "reserved_units": 3513,
+            "component": "controller",
+            "started_at": "2026-10-12T21:42:08.812281+00:00",
+            "duration_ms": 1733.61,
+            "upstream_status": 200,
+            "retry_after_seconds": null,
+            "rate_limits": {
+              "remaining_requests": 992.0,
+              "limit_requests": 1000.0,
+              "reset_requests_seconds": 691.2,
+              "remaining_tokens": 2069.0,
+              "limit_tokens": 8000.0,
+              "reset_tokens_seconds": 44.482
+            },
+            "finish_reason": "length",
+            "complete": false,
+            "provider_success": true,
+            "error_code": null,
+            "output_status": "controller_incomplete_output",
+            "input_tokens": 611,
+            "output_tokens": 512
+          }
+        ],
+        "pacing_wait_ms": 0.0,
+        "provider_execution_ms": 10705.21,
+        "controller_output_failures": 3,
+        "underlying_terminal_error": "controller_incomplete_output",
+        "termination_reason": "decision_failure_limit"
+      },
+      "factual_grounding": "not_evaluated",
+      "model_calls": 7,
+      "generation_calls": 1,
+      "decision_calls": 6,
+      "retrieval_calls": 1,
+      "validation_calls": 1,
+      "validation_failures": 0,
+      "decision_failures": 3,
+      "retry_count": 0,
+      "agent_steps": 9,
+      "uncertainty_events": 0,
+      "fallback_events": 0,
+      "controller_usage": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "reported_model": null,
+        "calls": 6,
+        "latency_ms": 9060.23,
+        "input_tokens": 3585,
+        "output_tokens": 2248,
+        "token_source": "reported",
+        "usage_complete": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "generation_usage": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "reported_model": null,
+        "calls": 1,
+        "latency_ms": 1645.65,
+        "input_tokens": 770,
+        "output_tokens": 539,
+        "token_source": "reported",
+        "usage_complete": true,
+        "estimated_api_cost_usd": null,
+        "cost_status": "unknown"
+      },
+      "end_to_end_latency_ms": 14760.3,
+      "repetition": 1,
+      "job_id": "d1b7340311af968716384fbe5d9e269b9f4f0b90395513563b97fe51b274a8af",
+      "run_id": "56cb169914e14c28888625a2e793bb9a",
+      "blind_run_id": "bf0945c2a2914e3ea6722e679ecef77e",
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "inter_execution_wait_ms": 2000.46,
+      "error_category": "controller_incomplete_output",
+      "safe_error_message": "Execution failed; see safe error category and trace."
+    }
+  ]
+}
