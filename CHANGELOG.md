@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-11-05 — OpenRouter providers
+
+- Added OpenRouter for generation and embeddings through OpenAI-compatible clients.
+- Added OPENROUTER_API_KEY defaults, UI selection, key reuse, and editable model IDs.
+- Documented free-route limits and the suggested embedding model's data-use terms.
+
+## 2026-11-03 — Adaptive practice
+
+- Added a session topic map and optional performance-based practice planning.
+- Submitted choice answers update compact topic totals independently of paper history.
+- Generation validates assigned topics/objectives and rejects exact recent repeats.
+- Retrieval searches planned topics; the UI explains the mix and evidence limits.
+
 ## 2026-11-02 — Prepare the vector index with study material
 
 - Moved embedding configuration and consent into Study material preparation.

@@ -8,6 +8,31 @@ print or save as PDF.
 
 ## Try an interactive exam
 
+### Adaptive practice
+
+Before your first exam, open **Adaptive practice · learning topics** and enter
+up to 20 topic names, one per line, taken from your material's headings. This
+learner-reviewed topic map stays fixed for the session. Generate and submit a
+baseline exam, then enable **Practice my weak areas** for subsequent exams.
+
+Python allocates approximately 60% of questions to topics with incorrect answers,
+20% to less-assessed topics, and 20% to revision (rounded for small exams; categories
+can overlap). With no incorrect answers recorded, it uses broad coverage. The LLM
+must label each question with its assigned topic and a learning objective. Source
+retrieval searches each assigned topic using the existing lexical or vector index.
+The selected mix takes priority over the optional focus topic.
+
+Only submitted choice questions update the session profile. Skipped questions are
+separate, and written answers do not affect adaptation. One wrong answer is a
+practice signal, not a reliable diagnosis of mastery. Totals survive paper eviction;
+Clear session removes them. Recent question text is sent to the generation provider
+to discourage repetition; exact repeats of the last 20 retained questions are rejected.
+Semantic paraphrases are not automatically detected. Topic labels and question
+relevance still require human review. This is deterministic adaptive planning,
+usable with either exam workflow; it does not add autonomous model decisions.
+
+### Generate and answer
+
 1. Start the app using the commands below. Choose an LLM provider, enter an
    available model ID and API key, and select **Sample** or your own study material.
    Optionally enable **Prepare semantic search (API embeddings)** in Study material.
@@ -79,7 +104,7 @@ server dependencies; no separate FastAPI application is maintained or launched.
 
 ## Use your own provider
 
-Choose OpenAI, Google Gemini, Groq or Anthropic. Enter an exact model ID available
+Choose OpenAI, Google Gemini, Groq, Anthropic or OpenRouter. Enter an exact model ID available
 in your provider account and your key in the masked field. The integrations accept
 model IDs rather than imposing a stale model catalog. Client construction and
 mocked tests do not prove that a model is available or compatible. **Live tests of
@@ -162,7 +187,8 @@ Topic-only generation has no retrieval. Both retrieval options use an LLM to
 generate the final questions.
 
 For semantic retrieval, select **OpenAI** (default embedding model:
-`text-embedding-3-small`) or **Google Gemini** (`gemini-embedding-001`), then supply
+`text-embedding-3-small`), **Google Gemini** (`gemini-embedding-001`), or
+**OpenRouter** (`nvidia/nemotron-3-embed-1b:free`), then supply
 an embedding API key and confirm the separate sharing notice. Model IDs are
 editable; live verification remains pending. Embedding providers and generation
 providers are independent: Groq generation can use Gemini or OpenAI embeddings.
@@ -170,6 +196,29 @@ If both providers match, you can explicitly reuse the generation key. Groq (the
 existing integration) and xAI Grok are distinct services; xAI is not implemented.
 
 Semantic preparation sends **all chunks** to the embedding provider after consent.
+
+For OpenRouter, one `OPENROUTER_API_KEY` can serve generation and embeddings:
+
+```dotenv
+LLM_PROVIDER=OpenRouter
+LLM_MODEL=openrouter/free
+RETRIEVAL_MODE=semantic
+EMBEDDING_PROVIDER=OpenRouter
+EMBEDDING_MODEL=nvidia/nemotron-3-embed-1b:free
+OPENROUTER_API_KEY=your-key-here
+```
+
+OpenRouter routes requests to model providers. `openrouter/free` selects an
+available free chat model, so behavior may differ between calls; pin a specific
+model for reproducible experiments. Free chat routes and the suggested embedding
+route were listed on 2026-11-05, but availability and usage limits can change.
+Other models may be paid. The NVIDIA free embedding endpoint logs inputs for
+security and product improvement and asks users not to submit confidential or
+personal data. Review the [model terms](https://openrouter.ai/nvidia/nemotron-3-embed-1b:free)
+and [free-model limits](https://openrouter.ai/collections/free-models) before use.
+This integration uses the existing LangChain OpenAI-compatible clients; no new
+dependency is needed. Live OpenRouter generation and retrieval quality remain unverified.
+
 Later semantic searches embed only the query. Generation sends retrieved passages to its provider.
 API charges may apply. With no topic, coverage sampling makes no query embedding calls;
 an agent may subsequently choose a query. Similarity selects nearest passages, not

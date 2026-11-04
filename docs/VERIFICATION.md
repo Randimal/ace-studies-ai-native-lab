@@ -187,3 +187,23 @@ issues were corrected before the passing full-suite run above.
   collection without deleting unrelated collections.
 - No live generation or embedding API calls were made.
 
+# 2026-11-03 — Adaptive practice
+
+- Regression run: 123 passed; one positional UI test needed updating because
+  the new practice checkbox precedes consent. It now targets the named control.
+- Follow-up run: all five adaptive tests and that corrected regression passed.
+- Covered allocation, limited evidence, submission idempotency, written/skipped
+  exclusions, topic validation, repeated-question rejection, per-topic retrieval,
+  and the baseline → submit → adaptive exam → clear UI flow using mocked models.
+- Release scan passed and all 22 historical artifact hashes remain unchanged.
+- No live provider calls or learning-outcome evaluation were performed.
+
+# 2026-11-05 — OpenRouter
+
+- Provider, semantic retrieval, and configuration tests: 37 passed.
+- Existing Streamlit tests: 12 passed. Two OpenRouter-specific tests passed after
+  aligning the HTTP stub with the pinned SDK's httpx2 transport.
+- Verified chat/embedding URLs, model IDs, float vectors, raw-text inputs,
+  explicit API key isolation, UI defaults, and shared-key selection offline.
+- Release scan and historical hash checks passed. No live OpenRouter calls made.
+

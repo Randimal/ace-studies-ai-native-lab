@@ -1,5 +1,14 @@
 # Learn the exam flow
 
+Adaptive practice is implemented in `core/adaptive.py`: a learner-defined topic
+vocabulary, a deterministic question planner, and an idempotent submission update.
+`ExamRequest.practice_topics` assigns one topic per question. Generation receives
+that plan; validation rejects mismatched labels or missing learning objectives.
+The graph retrieves evidence for each distinct assigned topic within a shared
+16,000-byte budget. Topic totals live in session memory, not Chroma. They outlive
+the five-paper history but are deleted by Clear session. This feedback loop does
+not imply autonomous planning or scientifically calibrated mastery estimates.
+
 Start by selecting an LLM provider and entering a model ID and API key. Choose
 Sample, Mixed question types and three questions, then confirm the sharing notice.
 Click Prepare study material once before generating your first exam.
