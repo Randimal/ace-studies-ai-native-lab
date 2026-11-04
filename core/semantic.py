@@ -13,7 +13,8 @@ from .retrieval import retrieve
 from .validation import LabError
 from .vector_db import ChromaIndex, clear_index
 
-EMBEDDING_MODELS = {"OpenAI": "text-embedding-3-small", "Google Gemini": "gemini-embedding-001"}
+EMBEDDING_MODELS = {"OpenAI": "text-embedding-3-small", "Google Gemini": "gemini-embedding-001",
+                    "OpenRouter": "nvidia/nemotron-3-embed-1b:free"}
 
 
 @dataclass(frozen=True)
@@ -24,16 +25,17 @@ class EmbeddingSettings:
 
     def __post_init__(self):
         if self.provider not in EMBEDDING_MODELS:
-            raise LabError("configuration", "Choose OpenAI or Google Gemini for embeddings.")
+            raise LabError("configuration", "Choose OpenAI, Google Gemini, or OpenRouter for embeddings.")
         ProviderSettings(self.provider, self.model, self.api_key)
 
 
 def create_embeddings(settings, timeout):
     key = settings.api_key.get_secret_value()
-    if settings.provider == "OpenAI":
+    if settings.provider in {"OpenAI", "OpenRouter"}:
         from langchain_openai import OpenAIEmbeddings
         return OpenAIEmbeddings(model=settings.model, api_key=key,
-                                base_url="https://api.openai.com/v1", request_timeout=timeout,
+                                base_url="https://openrouter.ai/api/v1" if settings.provider == "OpenRouter" else "https://api.openai.com/v1",
+                                model_kwargs={"encoding_format": "float"}, request_timeout=timeout,
                                 max_retries=0, chunk_size=8, check_embedding_ctx_length=False)
     from langchain_google_genai import GoogleGenerativeAIEmbeddings
     from google.genai.types import HttpOptions, HttpRetryOptions

@@ -5,7 +5,7 @@ import re
 from pydantic import SecretStr
 from .validation import LabError
 
-PROVIDERS = ("OpenAI", "Google Gemini", "Groq", "Anthropic")
+PROVIDERS = ("OpenAI", "Google Gemini", "Groq", "Anthropic", "OpenRouter")
 
 
 @dataclass(frozen=True)
@@ -35,6 +35,9 @@ def create_model(settings: ProviderSettings, timeout: float, output_tokens: int)
     if settings.provider == "OpenAI":
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(**common, base_url="https://api.openai.com/v1")
+    if settings.provider == "OpenRouter":
+        from langchain_openai import ChatOpenAI
+        return ChatOpenAI(**common, base_url="https://openrouter.ai/api/v1", use_responses_api=False)
     if settings.provider == "Groq":
         from langchain_groq import ChatGroq
         return ChatGroq(**common)

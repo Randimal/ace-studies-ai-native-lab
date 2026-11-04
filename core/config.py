@@ -11,7 +11,8 @@ from .semantic import EMBEDDING_MODELS
 
 ENV_FILE = Path(__file__).resolve().parents[1] / ".env"
 KEY_NAMES = {"OpenAI": "OPENAI_API_KEY", "Google Gemini": "GOOGLE_API_KEY",
-             "Groq": "GROQ_API_KEY", "Anthropic": "ANTHROPIC_API_KEY"}
+             "Groq": "GROQ_API_KEY", "Anthropic": "ANTHROPIC_API_KEY",
+             "OpenRouter": "OPENROUTER_API_KEY"}
 SETTING_NAMES = ("LLM_PROVIDER", "LLM_MODEL", "RETRIEVAL_MODE", "EMBEDDING_PROVIDER", "EMBEDDING_MODEL")
 
 
