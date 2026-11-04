@@ -93,7 +93,9 @@ def generate(calls: ModelCalls, request: ExamRequest, sources, previous=None, fe
         "answer_indices containing two to four distinct correct indices 0..3, rubric empty. "
         "For written: short written response, options [], answer_index null, answer_indices [], "
         "and a clear marking rubric for a human reviewer. Explain each answer (a sample answer for written). "
-        "Avoid duplicate questions. "
+        "Avoid duplicate questions and previous_questions; ask fresh questions testing the concepts. "
+        "When practice_topics is supplied, assign each question the exact "
+        "topic at the corresponding position and a concrete learning_objective. Test that topic. "
         "Difficulty describes the requested challenge, not a verified calibration. "
         + ("Use ONLY the supplied passages for answers and explanations. Cite their source_id values. "
            "If insufficient supported material exists, return status insufficient_evidence and questions []. "
@@ -103,6 +105,8 @@ def generate(calls: ModelCalls, request: ExamRequest, sources, previous=None, fe
     return calls.invoke(Exam, instruction, {
         "count": request.count, "difficulty": request.difficulty, "topic": request.topic,
         "question_types": request.question_types(),
+        "practice_topics": request.practice_topics,
+        "previous_questions": request.previous_questions,
         "sources": [{"source_id": d.metadata["source_id"], "text": d.page_content} for d in sources],
         "previous_draft": previous.model_dump() if previous else None, "feedback": feedback,
     })

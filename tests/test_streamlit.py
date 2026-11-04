@@ -193,7 +193,7 @@ def test_generation_requires_credentials_and_consent(monkeypatch):
     from core.generation import ModelCalls
     monkeypatch.setattr(ModelCalls, "invoke", lambda *a, **k: pytest.fail("Unexpected model call"))
     app = AppTest.from_file(APP, default_timeout=30).run()
-    assert app.selectbox(key="provider").options == ["OpenAI", "Google Gemini", "Groq", "Anthropic"]
+    assert app.selectbox(key="provider").options == ["OpenAI", "Google Gemini", "Groq", "Anthropic", "OpenRouter"]
     app.button(key="generate_exam").click().run()
     assert app.error and "Confirm" in app.error[0].value
     app.checkbox(key="consent").check()
@@ -221,7 +221,7 @@ def test_topic_provider_flow_and_key_isolation(monkeypatch):
     app.button(key="prepare_material").click().run()
     app.text_input(key="topic").set_value("numbers")
     app.number_input[0].set_value(1)
-    app.checkbox[0].check()
+    app.checkbox(key="consent").check()
     app.button(key="generate_exam").click().run()
     assert not app.exception and not app.error
     assert captured_keys == ["session-only-test-key"]

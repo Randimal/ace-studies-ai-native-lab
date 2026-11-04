@@ -46,11 +46,20 @@ def run_exam(request: ExamRequest, documents: list[Document], settings: Provider
 
     def retrieve_node(state):
         # Changing evidence invalidates both the old draft and its validation.
-        return {"sources": (semantic or retrieve)(documents, state.get("query", request.topic)),
+        if request.practice_topics:
+            topics = list(dict.fromkeys(request.practice_topics))
+            sources = {}
+            for topic in topics:
+                for doc in (semantic or retrieve)(documents, topic, limit=8,
+                                                  byte_budget=16_000 // len(topics)):
+                    sources[doc.metadata["source_id"]] = doc
+            selected = list(sources.values())
+        else:
+            selected = (semantic or retrieve)(documents, state.get("query", request.topic))
+        return {"sources": selected,
                 "candidate": None, "validated": False, "feedback": ""}
 
     def generate_node(state):
-        print(state)
         if state["attempts"] >= limits.max_attempts:
             raise LabError("retry_limit", "Generation attempt limit reached. Try fewer questions or different material.")
         try:

@@ -72,7 +72,6 @@ def chunk_pages(pages: list[tuple[int | None, str]], size: int = 1200, overlap: 
 
 
 def load_text(text: str) -> list[Document]:
-    print(len(text))
     if len(text) > MAX_CHARS:
         raise LabError("input", "Notes may contain at most 100,000 characters.")
     return chunk_pages([(None, text)])

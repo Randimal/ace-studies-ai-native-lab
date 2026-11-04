@@ -13,6 +13,7 @@ from core.semantic import EMBEDDING_MODELS, EmbeddingSettings, SemanticRetriever
 from core.validation import ExamRequest, LabError
 from core.vector_db import clear_index
 from core.config import load_defaults
+from core.adaptive import topic_map, plan_practice, record_submission
 
 st.set_page_config(page_title="Ace Studies · Exam Lab", page_icon="📚", layout="centered")
 
@@ -55,6 +56,9 @@ provider = st.selectbox("Provider", PROVIDERS, key="provider")
 st.caption("Generation requires an LLM provider and API key. Enter an exact model ID available in your account. Live integration verification is pending.")
 st.session_state.setdefault(f"model_{provider}", defaults.model if provider == defaults.provider else "")
 model = st.text_input("Model ID", max_chars=150, key=f"model_{provider}")
+if provider == "OpenRouter":
+    st.caption("Use an OpenRouter model ID (author/model), or openrouter/free for its free chat router. "
+               "Free routes have usage limits; other models may be paid. Requests pass through OpenRouter to its model providers.")
 key_override = st.text_input("API key override — this session only", type="password", key=f"key_{provider}",
                              help="Leave blank to use this provider's environment or .env key.")
 api_key = key_override.strip() or defaults.key(provider)
@@ -92,6 +96,13 @@ with st.container(border=True):
                 st.session_state.setdefault(f"embedding_model_{embedding_provider}",
                     defaults.embedding_model if embedding_provider == defaults.embedding_provider else EMBEDDING_MODELS[embedding_provider])
                 embedding_model = st.text_input("Embedding model ID", max_chars=150, key=f"embedding_model_{embedding_provider}")
+                if embedding_provider == "OpenRouter":
+                    st.caption("Choose an embedding model, not a chat model. Free availability and limits can change. "
+                               "Requests pass through OpenRouter to its model providers.")
+                    if embedding_model.strip() == "nvidia/nemotron-3-embed-1b:free":
+                        st.warning("NVIDIA's free endpoint logs inputs for security and product improvement. "
+                                   "Do not send confidential or personal data. "
+                                   "[Review model terms](https://openrouter.ai/nvidia/nemotron-3-embed-1b:free).")
                 reuse_key = provider == embedding_provider and st.checkbox("Use my generation API key for embeddings", value=True, key="reuse_embedding_key")
                 if reuse_key:
                     embedding_key = api_key
@@ -142,6 +153,19 @@ with st.container(border=True):
             st.caption("Lexical search only. To enable semantic search, clear this session and prepare with embeddings enabled.")
 
 st.subheader("Exam generation")
+with st.expander("Adaptive practice · learning topics"):
+    st.caption("Before your first exam, enter up to 20 learning topics, one per line, using your study material's headings. "
+               "These names stay fixed for this session. For example: Conditional probability, Bayes theorem. "
+               "Automatic topic discovery is not included.")
+    topic_text = st.text_area("Learning topics (one per line)", key="learning_topics_text", max_chars=2020,
+                             disabled=bool(st.session_state.get("papers")))
+    profile = st.session_state.get("learning_profile", {})
+    if profile:
+        st.dataframe([{"Topic": t, **s, "Evidence": "Limited" if s["correct"] + s["incorrect"] < 2 else "Practice results"}
+                      for t, s in profile.items()], hide_index=True)
+    st.caption("Only submitted choice questions update performance. Written answers are excluded; skipped questions are tracked separately. "
+               "Totals survive the five-paper history limit and are removed by Clear session.")
+adaptive_mode = st.checkbox("Practice my weak areas", key="adaptive_mode")
 retrieval_mode = "Lexical"
 if material and source_mode != "Topic only":
     modes = ["Lexical", "Semantic — API embeddings"] if material.get("semantic_ready") else ["Lexical"]
@@ -150,7 +174,7 @@ if material and source_mode != "Topic only":
 
 topic = st.text_input("Topic" if source_mode == "Topic only" else "Focus topic (optional)", max_chars=200, key="topic")
 left, right = st.columns(2)
-count = left.number_input("Number of questions", min_value=1, max_value=10, value=5, key="count")
+count = left.number_input("Number of questions", min_value=1, max_value=10, value=2, key="count")
 difficulty = right.selectbox("Difficulty", ["Easy", "Medium", "Hard", "Mixed"], index=1, key="difficulty")
 formats = {"Single answer (radio buttons)": "single", "Multiple answers (checkboxes)": "multiple",
            "Short written answers": "written", "Mixed question types": "mixed"}
@@ -172,7 +196,14 @@ if st.button("Generate exam", key="generate_exam", type="primary"):
             raise LabError("input", "Prepare study material before generating an exam.")
         with st.spinner("Generating your exam from prepared material…"):
             documents = material["documents"]
+            topics = topic_map(topic_text)
+            practice_topics, practice_reason = [], "Normal exam without topic tracking."
+            if topics or adaptive_mode:
+                practice_topics, practice_reason = plan_practice(topics, st.session_state.get("learning_profile", {}), count, adaptive_mode)
+            previous_questions = [q.question for p in st.session_state.get("papers", [])
+                                  for q in p["result"]["exam"].questions][-20:] if adaptive_mode else []
             request = ExamRequest(count=count, difficulty=difficulty, topic=topic, question_format=formats[question_format],
+                                  practice_topics=practice_topics, previous_questions=previous_questions,
                                   workflow="agentic" if workflow.startswith("Agentic") else "deterministic")
             settings = ProviderSettings(provider, model.strip(), SecretStr(api_key))
             semantic = None
@@ -182,6 +213,8 @@ if st.button("Generate exam", key="generate_exam", type="primary"):
                 semantic = SemanticRetriever(embedding_settings, cache, persistent=material["persistent"],
                                              resume_id=material["resume_id"], prepared_only=True)
             result = run_exam(request, documents, settings, semantic=semantic)
+            result["practice_reason"] = practice_reason
+            result["practice_topics"] = practice_topics
             history = st.session_state.setdefault("papers", [])
             number = st.session_state.get("paper_number", 0) + 1
             paper, removed = add_paper(history, result, request, provider, model.strip(), number)
@@ -206,6 +239,9 @@ if history:
     paper = by_id[selected]
     # References only: history owns the result and attempt, not duplicate copies.
     result = st.session_state["result"] = paper["result"]
+    st.info(result.get("practice_reason", "Normal exam."))
+    if result.get("practice_topics"):
+        st.caption("Question topics: " + " · ".join(result["practice_topics"]))
     attempt = st.session_state["attempt"] = paper["attempt"]
     st.caption(f"{paper['provider']} · {paper['model']} · {paper['request']['difficulty']} · {paper['request']['question_format']}")
     # Streamlit discards hidden widgets. Answers live separately in each attempt;
@@ -246,6 +282,7 @@ if history:
     if not attempt["submitted"] and st.button("Submit exam", key="submit_exam", type="primary"):
         attempt["grades"] = grade_attempt(exam, attempt["responses"])
         attempt["submitted"] = True
+        record_submission(st.session_state.setdefault("learning_profile", {}), exam, attempt, topic_map(topic_text))
         st.rerun()
     if attempt["submitted"]:
         total = sum(q.kind != "written" for q in exam.questions)
