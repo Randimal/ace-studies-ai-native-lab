@@ -28,7 +28,7 @@ def main():
         path = ROOT / name
         if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             failures.append(f"Historical integrity mismatch: {name}")
-    patterns = [re.compile(r"\b(?:gsk_|sk-ant-|sk-proj-|AIza)[A-Za-z0-9_-]{20,}"),
+    patterns = [re.compile(r"\b(?:gsk_|sk-ant-|sk-proj-|sk-or-v1-|AIza)[A-Za-z0-9_-]{20,}"),
                 re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")]
     paths = list(candidates())
     for path in paths:

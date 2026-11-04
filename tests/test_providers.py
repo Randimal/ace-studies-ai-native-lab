@@ -11,13 +11,16 @@ from core.providers import ProviderSettings, create_model
 from core.validation import Exam, LabError
 
 
-@pytest.mark.parametrize("provider", ["OpenAI", "Groq", "Anthropic", "Google Gemini"])
+@pytest.mark.parametrize("provider", ["OpenAI", "Groq", "Anthropic", "Google Gemini", "OpenRouter"])
 def test_real_client_construction_no_network(provider):
     settings = ProviderSettings(provider, "test-model", SecretStr("synthetic-test-key"))
     model = create_model(settings, 4, 100)
     assert model.max_retries == 0
     assert "synthetic-test-key" not in repr(settings)
     assert model.cache is False
+    if provider == "OpenRouter":
+        assert model.openai_api_base == "https://openrouter.ai/api/v1"
+        assert model.use_responses_api is False
 
 
 @pytest.mark.parametrize("provider,model,key", [("Other", "x", "key"), ("Demo", "x", "key"), ("Groq", "", "key"), ("Groq", "x", "")])

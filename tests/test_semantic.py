@@ -93,12 +93,15 @@ def test_session_caches_separate(docs, fake):
     assert a["store"] is not b["store"]
 
 
-@pytest.mark.parametrize("provider", ["OpenAI", "Google Gemini"])
+@pytest.mark.parametrize("provider", ["OpenAI", "Google Gemini", "OpenRouter"])
 def test_real_embedding_client_bounds(provider):
     client = create_embeddings(settings(provider), 3)
-    if provider == "OpenAI":
+    if provider in {"OpenAI", "OpenRouter"}:
         assert client.max_retries == 0 and client.request_timeout == 3
         assert client.check_embedding_ctx_length is False
+        assert client.model_kwargs["encoding_format"] == "float"
+        if provider == "OpenRouter":
+            assert client.openai_api_base == "https://openrouter.ai/api/v1"
     else:
         config = client._build_config(task_type="RETRIEVAL_QUERY")
         assert config.http_options.timeout == 3000
