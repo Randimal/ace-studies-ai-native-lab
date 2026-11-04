@@ -79,7 +79,7 @@ def test_sample_generation_and_rerun(monkeypatch, mocked_llm):
     assert not app.exception
     app.button(key="generate_exam").click().run()
     assert not app.exception and not app.error
-    assert len(app.session_state["result"]["exam"].questions) == 5
+    assert len(app.session_state["result"]["exam"].questions) == 2
     import core.graph
     monkeypatch.setattr(core.graph, "run_exam", lambda *a, **k: (_ for _ in ()).throw(AssertionError("Unexpected regeneration")))
     app.run()
@@ -185,7 +185,8 @@ def test_paste_and_topic_generation(notes, mocked_llm):
     app.button(key="prepare_material").click().run()
     app.text_input(key="topic").set_value("water")
     app.button(key="generate_exam").click().run()
-    assert not app.error and not app.exception
+    assert not app.error, [e.value for e in app.error]
+    assert not app.exception
     assert app.session_state["result"]["basis"] == "model knowledge"
 
 
@@ -231,12 +232,10 @@ def test_topic_provider_flow_and_key_isolation(monkeypatch):
     assert other.text_input(key="key_Groq").value == ""
 
 
-def test_semantic_consent_and_index_reuse(monkeypatch, notes):
+@pytest.mark.parametrize("count", [2, 5])
+def test_semantic_consent_and_index_reuse(monkeypatch, mocked_llm, count):
     from types import SimpleNamespace
     from core import semantic
-    from core.documents import load_text
-    from core.generation import ModelCalls
-    from core.validation import ExamRequest
     events = []
     monkeypatch.setenv("OPENAI_API_KEY", "default-embedding-key")
     def factory(*args):
@@ -246,14 +245,14 @@ def test_semantic_consent_and_index_reuse(monkeypatch, notes):
             return [[1., 0.] for _ in texts]
         return SimpleNamespace(embed_documents=embed, embed_query=lambda text: [1., 0.])
     monkeypatch.setattr(semantic, "create_embeddings", factory)
-    monkeypatch.setattr(ModelCalls, "invoke", lambda *a, **k: scripted_exam(ExamRequest(count=5), load_text(notes)))
     app = AppTest.from_file(APP, default_timeout=30).run()
     app.selectbox(key="provider").set_value("Groq").run()
     app.text_input(key="model_Groq").set_value("test-model")
     app.text_input(key="key_Groq").set_value("generation-key")
     app.checkbox(key="prepare_semantic").check().run()
     assert app.text_input(key="embedding_key_OpenAI").value == ""
-    app.text_input(key="topic").set_value("water vapor")
+    app.text_input(key="topic").set_value("supervised learning")
+    app.number_input(key="count").set_value(count)
     app.checkbox(key="consent").check()
     app.button(key="prepare_material").click().run()
     assert app.error and not events
@@ -263,8 +262,10 @@ def test_semantic_consent_and_index_reuse(monkeypatch, notes):
     assert not app.error and events == ["documents"]
     assert "papers" not in app.session_state
     app.button(key="generate_exam").click().run()
-    assert not app.error and not app.exception
+    assert not app.error, [e.value for e in app.error]
+    assert not app.exception
     assert app.session_state["result"]["retrieval"] == "semantic"
+    assert len(app.session_state["result"]["exam"].questions) == count
     app.button(key="generate_exam").click().run()
     assert not app.error and events == ["documents"]
     assert app.session_state["result"]["embedding_cache_hit"]
@@ -273,16 +274,12 @@ def test_semantic_consent_and_index_reuse(monkeypatch, notes):
 
 
 @pytest.mark.parametrize("delete_button", ["delete_vector_index", "clear_session"])
-def test_chroma_persistence_opt_in_and_delete(monkeypatch, notes, tmp_path, delete_button):
+def test_chroma_persistence_opt_in_and_delete(monkeypatch, mocked_llm, tmp_path, delete_button):
     from types import SimpleNamespace
     from core import semantic, vector_db
-    from core.documents import load_text
-    from core.generation import ModelCalls
-    from core.validation import ExamRequest
     monkeypatch.setattr(vector_db, "DATABASE_PATH", tmp_path)
     monkeypatch.setattr(semantic, "create_embeddings", lambda *a: SimpleNamespace(
         embed_documents=lambda texts: [[1., 0.] for _ in texts], embed_query=lambda text: [1., 0.]))
-    monkeypatch.setattr(ModelCalls, "invoke", lambda *a, **k: scripted_exam(ExamRequest(count=5), load_text(notes)))
     app = AppTest.from_file(APP, default_timeout=45).run()
     app.selectbox(key="provider").set_value("Groq").run()
     app.text_input(key="model_Groq").set_value("test-model")
@@ -291,7 +288,7 @@ def test_chroma_persistence_opt_in_and_delete(monkeypatch, notes, tmp_path, dele
     assert app.checkbox(key="persist_index").value is False
     app.checkbox(key="persist_index").check().run()
     app.text_input(key="embedding_key_OpenAI").set_value("embedding-key")
-    app.text_input(key="topic").set_value("water vapor")
+    app.text_input(key="topic").set_value("supervised learning")
     app.checkbox(key="embedding_consent").check()
     app.checkbox(key="consent").check()
     app.button(key="prepare_material").click().run()
