@@ -114,6 +114,6 @@ def test_retrieval_coverage_and_missing_topic(notes):
     docs = chunk_pages([(i, notes) for i in range(1, 21)])
     selected = retrieve(docs)
     assert selected[0] == docs[0] and selected[-1] == docs[-1]
-    assert retrieve(docs, "evaporation")
+    assert retrieve(docs, "classification")
     with pytest.raises(LabError, match="No source"):
         retrieve(docs, "quantum")
