@@ -21,12 +21,24 @@ def candidates():
                 yield path
 
 
+def matches_historical_hash(data: bytes, expected: str) -> bool:
+    """Accept Git's LF/CRLF checkout conversion, but no other content changes.
+
+    The original manifest contains hashes from both newline styles. Preserve
+    those recorded hashes and reconstruct each style from the checked-out text.
+    Do not strip whitespace, decode text, remove BOMs, or rewrite JSON/CSV.
+    """
+    lf = data.replace(b"\r\n", b"\n")
+    return any(hashlib.sha256(candidate).hexdigest() == expected
+               for candidate in (lf, lf.replace(b"\n", b"\r\n")))
+
+
 def main():
     failures = []
     recorded = json.loads((ROOT / "docs/historical/sha256.json").read_text())
     for name, expected in recorded.items():
         path = ROOT / name
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+        if not path.is_file() or not matches_historical_hash(path.read_bytes(), expected):
             failures.append(f"Historical integrity mismatch: {name}")
     patterns = [re.compile(r"\b(?:gsk_|sk-ant-|sk-proj-|sk-or-v1-|AIza)[A-Za-z0-9_-]{20,}"),
                 re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")]
