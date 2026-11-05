@@ -94,6 +94,9 @@ def test_ui_adaptive_followup_and_clear(monkeypatch):
     app.radio(key="source_mode").set_value("Topic only").run()
     app.button(key="prepare_material").click().run()
     app.text_input(key="topic").set_value("Math")
+    # This scenario checks the 3/1/1 allocation for a five-question exam,
+    # independently of the application's default question count.
+    app.number_input(key="count").set_value(5)
     app.text_area(key="learning_topics_text").set_value("Probability\nAlgebra\nCalculus")
     app.checkbox(key="consent").check()
     app.button(key="generate_exam").click().run()
